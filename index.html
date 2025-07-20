@@ -127,18 +127,13 @@
             animation: pulse 3s ease-in-out infinite;
             box-shadow: 0 6px 15px rgba(72, 187, 120, 0.3);
             z-index: 5;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
         
-        .signal::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to center, rgba(72, 187, 120, 0.4), transparent);
-            transform: translate(-50%, -50%);
-            z-index: -1;
+        .signal:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(72, 187, 120, 0.6);
         }
         
         .channels-layer {
@@ -166,6 +161,13 @@
             margin: 0 auto 8px;
             position: relative;
             animation: float 4s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .channel-icon:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
         }
         
         .channel-title {
@@ -202,7 +204,6 @@
             color: white;
         }
         
-        /* Channel specific colors */
         .phone { background: linear-gradient(135deg, #4299e1, #3182ce); }
         .email { background: linear-gradient(135deg, #ed8936, #dd6b20); }
         .linkedin { background: linear-gradient(135deg, #0077b5, #005885); }
@@ -212,7 +213,6 @@
         .gifts { background: linear-gradient(135deg, #d69e2e, #b7791f); }
         .landing { background: linear-gradient(135deg, #f56565, #e53e3e); }
         
-        /* Positioning channels around the outer circle */
         .channel-1 { top: -40px; left: 40%; transform: translateX(-50%); }
         .channel-2 { top: 10px; right: -60px; }
         .channel-3 { bottom: 30px; right: -60px; }
@@ -222,7 +222,6 @@
         .channel-7 { top: 200px; right: -20px; }
         .channel-8 { bottom: 200px; left: -20px; }
         
-        /* Signal positioning */
         .signal-1 { top: 100px; left: 50%; transform: translateX(-50%) rotate(-5deg); }
         .signal-2 { top: 130px; right: 160px; transform: rotate(10deg); }
         .signal-3 { right: 140px; top: 45%; transform: rotate(0deg) translateY(-50%); }
@@ -253,22 +252,6 @@
         .ring-2 { width: 480px; height: 480px; animation-duration: 25s; animation-direction: reverse; }
         .ring-3 { width: 640px; height: 640px; animation-duration: 30s; }
         
-        /* Animations */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        
         .stats-overlay {
             position: fixed;
             top: 20px;
@@ -293,99 +276,129 @@
             font-size: 0.85rem;
         }
         
+        .clickable-hint {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            animation: bounce 2s infinite;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #2d3748, #4a5568);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        .close {
+            color: #cbd5e0;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .close:hover { color: #f7fafc; }
+        
+        .modal h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .modal-section { margin-bottom: 20px; }
+        .modal-section h4 {
+            color: #48bb78;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .modal-section ul {
+            margin-left: 20px;
+            line-height: 1.6;
+        }
+        .modal-section p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .priority-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .priority-1 { background: #e53e3e; color: white; }
+        .priority-2 { background: #dd6b20; color: white; }
+        .priority-3 { background: #38a169; color: white; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
         @media (max-width: 768px) {
-            .experience-circle {
-                width: 700px;
-                height: 700px;
-            }
-            
-            .buying-group {
-                width: 180px;
-                height: 180px;
-                padding: 15px;
-            }
-            
-            .channel-group {
-                width: 90px;
-            }
-            
-            .channel-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.3rem;
-            }
-            
-            .signal {
-                min-width: 80px;
-                font-size: 0.7rem;
-                padding: 6px 8px;
-            }
-            
-            .channel-tag {
-                font-size: 0.5rem;
-                right: -30px;
-            }
-            
-            .stats-overlay {
-                position: relative;
-                margin: 20px auto;
-            }
+            .experience-circle { width: 700px; height: 700px; }
+            .buying-group { width: 180px; height: 180px; padding: 15px; }
+            .channel-group { width: 90px; }
+            .channel-icon { width: 50px; height: 50px; font-size: 1.3rem; }
+            .signal { min-width: 80px; font-size: 0.7rem; padding: 6px 8px; }
+            .channel-tag { font-size: 0.5rem; right: -30px; }
+            .stats-overlay { position: relative; margin: 20px auto; }
         }
         
         @media (max-width: 480px) {
-            .experience-circle {
-                width: 500px;
-                height: 500px;
-            }
-            
-            .buying-group {
-                width: 140px;
-                height: 140px;
-                padding: 10px;
-            }
-            
-            .buying-group h2 {
-                font-size: 1.1rem;
-            }
-            
-            .personas {
-                gap: 4px;
-            }
-            
-            .persona {
-                font-size: 0.7rem;
-                padding: 4px 8px;
-            }
-            
-            .channel-group {
-                width: 70px;
-            }
-            
-            .channel-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
-            }
-            
-            .channel-title {
-                font-size: 0.7rem;
-            }
-            
-            .channel-tactics {
-                font-size: 0.6rem;
-            }
-            
-            .signal {
-                min-width: 60px;
-                font-size: 0.6rem;
-                padding: 4px 6px;
-            }
-            
-            .channel-tag {
-                font-size: 0.45rem;
-                right: -20px;
-                padding: 1px 2px;
-            }
+            .experience-circle { width: 500px; height: 500px; }
+            .buying-group { width: 140px; height: 140px; padding: 10px; }
+            .channel-tag { font-size: 0.45rem; right: -20px; padding: 1px 2px; }
         }
     </style>
 </head>
@@ -397,14 +410,12 @@
         </div>
         
         <div class="experience-circle">
-            <!-- Orchestration Rings -->
             <div class="orchestration-rings">
                 <div class="ring ring-1"></div>
                 <div class="ring ring-2"></div>
                 <div class="ring ring-3"></div>
             </div>
             
-            <!-- Central Buying Group -->
             <div class="buying-group">
                 <h2>🏢 Target Account</h2>
                 <div class="personas">
@@ -421,7 +432,6 @@
                 </div>
             </div>
             
-            <!-- Signals Layer -->
             <div class="signals-layer">
                 <div class="signal signal-1">📈 Funding Round</div>
                 <div class="signal signal-2">💼 New Hire - VP</div>
@@ -432,9 +442,7 @@
                 <div class="signal signal-7">📊 Tech Stack Research</div>
             </div>
             
-            <!-- Channels Layer -->
             <div class="channels-layer">
-                <!-- Phone -->
                 <div class="channel-group channel-1">
                     <div class="channel-icon phone">📞</div>
                     <div class="channel-title">Intelligent Phone</div>
@@ -442,7 +450,6 @@
                     <div class="channel-tag tag-enhanced">Enhanced</div>
                 </div>
                 
-                <!-- Contact Ads -->
                 <div class="channel-group channel-2">
                     <div class="channel-icon ads">🎯</div>
                     <div class="channel-title">Contact Ads</div>
@@ -450,7 +457,6 @@
                     <div class="channel-tag tag-new">New</div>
                 </div>
                 
-                <!-- LinkedIn -->
                 <div class="channel-group channel-3">
                     <div class="channel-icon linkedin">💼</div>
                     <div class="channel-title">LinkedIn</div>
@@ -458,7 +464,6 @@
                     <div class="channel-tag tag-enhanced">Enhanced</div>
                 </div>
                 
-                <!-- Direct Mail -->
                 <div class="channel-group channel-4">
                     <div class="channel-icon direct-mail">📦</div>
                     <div class="channel-title">Direct Mail</div>
@@ -466,7 +471,6 @@
                     <div class="channel-tag tag-new">New</div>
                 </div>
                 
-                <!-- Email -->
                 <div class="channel-group channel-5">
                     <div class="channel-icon email">📧</div>
                     <div class="channel-title">SDR Pipeline</div>
@@ -474,7 +478,6 @@
                     <div class="channel-tag tag-enhanced">Enhanced</div>
                 </div>
                 
-                <!-- 1:1 Video -->
                 <div class="channel-group channel-6">
                     <div class="channel-icon video">🎬</div>
                     <div class="channel-title">1:1 Video</div>
@@ -482,7 +485,6 @@
                     <div class="channel-tag tag-new">New</div>
                 </div>
                 
-                <!-- Landing Pages -->
                 <div class="channel-group channel-7">
                     <div class="channel-icon landing">🌐</div>
                     <div class="channel-title">Landing Pages</div>
@@ -490,7 +492,6 @@
                     <div class="channel-tag tag-new">New</div>
                 </div>
                 
-                <!-- eGifts -->
                 <div class="channel-group channel-8">
                     <div class="channel-icon gifts">🎁</div>
                     <div class="channel-title">Strategic Gifts</div>
@@ -500,63 +501,217 @@
             </div>
         </div>
         
-        <!-- Stats Overlay -->
+        <div class="clickable-hint">
+            💡 Click on signals and channels to learn more
+        </div>
+        
         <div class="stats-overlay">
             <h3>Engagement Metrics</h3>
-            <div class="stat-item">
-                <span>Touchpoints/Month:</span>
-                <span>25-40</span>
+            <div class="stat-item"><span>Touchpoints/Month:</span><span>25-40</span></div>
+            <div class="stat-item"><span>Channels Active:</span><span>8-12</span></div>
+            <div class="stat-item"><span>Buying Group Coverage:</span><span>95%</span></div>
+            <div class="stat-item"><span>Signals Monitored:</span><span>15+</span></div>
+            <div class="stat-item"><span>Personalization Score:</span><span>High</span></div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div id="modal-phone" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>📞 Intelligent Phone <span class="priority-badge priority-1">Priority 1</span></h3>
+            <div class="modal-section">
+                <h4>Current State (What's Working)</h4>
+                <ul>
+                    <li>Remains the strongest performing outbound channel</li>
+                    <li>Proven effectiveness in initiating conversations</li>
+                </ul>
             </div>
-            <div class="stat-item">
-                <span>Channels Active:</span>
-                <span>8-12</span>
+            <div class="modal-section">
+                <h4>Issues / Gaps</h4>
+                <ul>
+                    <li>SDRs inconsistently apply personalised insights or sales triggers</li>
+                    <li>No system to detect "spam likely" flagged numbers</li>
+                    <li>No strategic approach to Apple's new iOS call screening</li>
+                </ul>
             </div>
-            <div class="stat-item">
-                <span>Buying Group Coverage:</span>
-                <span>95%</span>
+            <div class="modal-section">
+                <h4>Future Enhancements</h4>
+                <ul>
+                    <li><strong>Trigger Coaching:</strong> Structured training on using data signals in conversations</li>
+                    <li><strong>Allego Scorecards:</strong> Performance metrics around trigger usage</li>
+                    <li><strong>Spam Monitoring:</strong> Number health tools with rotation protocols</li>
+                </ul>
             </div>
-            <div class="stat-item">
-                <span>Signals Monitored:</span>
-                <span>15+</span>
+        </div>
+    </div>
+
+    <div id="modal-directmail" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>📦 Direct Mail Program <span class="priority-badge priority-1">Priority 1</span></h3>
+            <div class="modal-section">
+                <h4>Five-Tier Direct Mail Strategy</h4>
+                <ul>
+                    <li><strong>Creative Impact Makers:</strong> High-value creative pieces via Barney</li>
+                    <li><strong>Personalized Fairytales:</strong> AI-generated stories featuring prospect companies</li>
+                    <li><strong>Handwritten Letters:</strong> Senior decision makers at high-intent accounts</li>
+                    <li><strong>Handwritten Postcards:</strong> Employees at target accounts</li>
+                    <li><strong>Strategic Book Gifting:</strong> Relevant books post-meeting booking</li>
+                </ul>
             </div>
-            <div class="stat-item">
-                <span>Personalization Score:</span>
-                <span>High</span>
+            <div class="modal-section">
+                <h4>Timeline & Impact</h4>
+                <p><strong>Timeline:</strong> 6-9 months | <strong>Effort:</strong> High | <strong>Competitive Advantage:</strong> Very High</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-contactads" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>🎯 Contact-Based Ads <span class="priority-badge priority-2">Priority 2</span></h3>
+            <div class="modal-section">
+                <h4>Current State</h4>
+                <p>Not yet rolled out; planned as part of Priority ABX program.</p>
+            </div>
+            <div class="modal-section">
+                <h4>Issues / Gaps</h4>
+                <ul>
+                    <li>Influ2 campaigns pending implementation</li>
+                    <li>No reporting infrastructure</li>
+                    <li>Engagement data not being fed into SDR prioritisation models</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Future Enhancements</h4>
+                <ul>
+                    <li><strong>Launch Influ2:</strong> Roll out contact-based advertising campaigns</li>
+                    <li><strong>Enhance Reporting:</strong> Dashboards showing impressions, clicks, engagement</li>
+                    <li><strong>Score Integration:</strong> Feed ad engagement into lead scoring logic</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Timeline & Impact</h4>
+                <p><strong>Timeline:</strong> 6 months | <strong>Effort:</strong> Medium | <strong>Competitive Advantage:</strong> High</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-linkedin" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>💼 LinkedIn Pipeline Nurturing <span class="priority-badge priority-3">Priority 3</span></h3>
+            <div class="modal-section">
+                <h4>Current State (What's Working)</h4>
+                <p>Automation through Amplemarket providing solid baseline performance.</p>
+            </div>
+            <div class="modal-section">
+                <h4>Issues / Gaps</h4>
+                <ul>
+                    <li>SDR LinkedIn profiles often fail to align with client branding expectations</li>
+                    <li>Lack of structured automation focused towards SDR pipeline contacts</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Future Enhancements</h4>
+                <ul>
+                    <li><strong>Profile Optimization:</strong> Best-practice checklist covering banner quality, photo, client alignment</li>
+                    <li><strong>Automated LinkedIn Nurture:</strong> Workflows for DMs and voice notes to prospects in SDR pipeline</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Timeline & Impact</h4>
+                <p><strong>Timeline:</strong> 3-6 months | <strong>Effort:</strong> Low-Medium | <strong>Competitive Advantage:</strong> Low-Medium</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-landingpages" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>🌐 1:1 Landing Pages <span class="priority-badge priority-2">Priority 2</span></h3>
+            <div class="modal-section">
+                <h4>Current State</h4>
+                <p>Not yet implemented - significant opportunity for personalization at scale.</p>
+            </div>
+            <div class="modal-section">
+                <h4>Two-Track Approach</h4>
+                <ul>
+                    <li><strong>Pre-Meeting Pages:</strong> Personalized pages with case studies, SDR video, CTAs to book</li>
+                    <li><strong>Post-Meeting Pages:</strong> Booking details, digital gifts (ungated - coffee voucher AND book), next-step resources</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Key Features</h4>
+                <ul>
+                    <li>Dynamic personalization based on company and role</li>
+                    <li>Integration with fairytale digital versions</li>
+                    <li>Seamless CRM integration</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Timeline & Impact</h4>
+                <p><strong>Timeline:</strong> 9 months | <strong>Effort:</strong> High | <strong>Client Retention Impact:</strong> High</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-funding" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>📈 Funding Round Signal</h3>
+            <div class="modal-section">
+                <h4>What This Signal Means</h4>
+                <p>Companies that have recently secured funding are often in expansion mode and looking to invest in new solutions to scale their operations.</p>
+            </div>
+            <div class="modal-section">
+                <h4>How We Detect It</h4>
+                <p>Through advanced data acquisition tools including Clay, N8N, and AI scraping that monitors funding announcements, press releases, and financial databases in real-time.</p>
+            </div>
+            <div class="modal-section">
+                <h4>Why It Matters</h4>
+                <p>Fresh funding indicates budget availability and growth initiatives, making prospects 3x more likely to invest in new solutions within 6 months.</p>
             </div>
         </div>
     </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const signals = document.querySelectorAll('.signal');
-            const channels = document.querySelectorAll('.channel-icon');
+            const modals = document.querySelectorAll('.modal');
+            const closeButtons = document.querySelectorAll('.close');
             
-            signals.forEach(signal => {
-                signal.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.1)';
-                    this.style.zIndex = '100';
-                });
-                
-                signal.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                    this.style.zIndex = '1';
+            // Add click events
+            document.querySelector('.channel-1 .channel-icon').addEventListener('click', () => openModal('modal-phone'));
+            document.querySelector('.channel-4 .channel-icon').addEventListener('click', () => openModal('modal-directmail'));
+            
+            function openModal(modalId) {
+                document.getElementById(modalId).style.display = 'block';
+            }
+            
+            function closeModal(modal) {
+                modal.style.display = 'none';
+            }
+            
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    closeModal(this.closest('.modal'));
                 });
             });
             
-            channels.forEach(channel => {
-                channel.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.1)';
-                });
-                
-                channel.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0px) scale(1)';
+            window.addEventListener('click', function(event) {
+                modals.forEach(modal => {
+                    if (event.target === modal) {
+                        closeModal(modal);
+                    }
                 });
             });
             
+            // Signal pulse effect
             setInterval(() => {
+                const signals = document.querySelectorAll('.signal');
                 const randomSignal = signals[Math.floor(Math.random() * signals.length)];
                 randomSignal.style.boxShadow = '0 8px 30px rgba(72, 187, 120, 0.8)';
-                
                 setTimeout(() => {
                     randomSignal.style.boxShadow = '0 6px 15px rgba(72, 187, 120, 0.3)';
                 }, 1000);
