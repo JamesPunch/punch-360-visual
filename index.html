@@ -18,6 +18,8 @@
             padding: 20px;
             color: white;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         .container {
@@ -178,6 +180,28 @@
             line-height: 1.1;
         }
         
+        .channel-tag {
+            position: absolute;
+            right: -35px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 2px 4px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+        
+        .tag-enhanced {
+            background: #ffd700;
+            color: #2d3748;
+        }
+        
+        .tag-new {
+            background: #ff6b6b;
+            color: white;
+        }
+        
         /* Channel specific colors */
         .phone { background: linear-gradient(135deg, #4299e1, #3182ce); }
         .email { background: linear-gradient(135deg, #ed8936, #dd6b20); }
@@ -188,33 +212,24 @@
         .gifts { background: linear-gradient(135deg, #d69e2e, #b7791f); }
         .landing { background: linear-gradient(135deg, #f56565, #e53e3e); }
         
-        /* Positioning channels around the outer circle - further out */
-        .channel-1 { top: -40px; left: 50%; transform: translateX(-50%); }
-        .channel-2 { top: 30px; right: -90px; }
-        .channel-3 { bottom: 30px; right: -90px; }
+        /* Positioning channels around the outer circle */
+        .channel-1 { top: -40px; left: 40%; transform: translateX(-50%); }
+        .channel-2 { top: 10px; right: -60px; }
+        .channel-3 { bottom: 30px; right: -60px; }
         .channel-4 { bottom: -40px; left: 50%; transform: translateX(-50%); }
         .channel-5 { bottom: 30px; left: -90px; }
         .channel-6 { top: 30px; left: -90px; }
-        .channel-7 { top: 120px; right: -20px; }
-        .channel-8 { bottom: 120px; left: -20px; }
+        .channel-7 { top: 200px; right: -20px; }
+        .channel-8 { bottom: 200px; left: -20px; }
         
-        /* Signal positioning - adjusted to avoid overlaps with channels */
+        /* Signal positioning */
         .signal-1 { top: 100px; left: 50%; transform: translateX(-50%) rotate(-5deg); }
-        .signal-2 { top: 150px; right: 180px; transform: rotate(15deg); }
-        .signal-3 { right: 160px; top: 50%; transform: rotate(0deg) translateY(-50%); }
-        .signal-4 { bottom: 150px; right: 180px; transform: rotate(-15deg); }
+        .signal-2 { top: 130px; right: 160px; transform: rotate(10deg); }
+        .signal-3 { right: 140px; top: 45%; transform: rotate(0deg) translateY(-50%); }
+        .signal-4 { bottom: 130px; right: 160px; transform: rotate(-10deg); }
         .signal-5 { bottom: 100px; left: 50%; transform: translateX(-50%) rotate(5deg); }
-        .signal-6 { left: 180px; bottom: 50%; transform: rotate(0deg) translateY(50%); }
-        .signal-7 { left: 160px; top: 50%; transform: rotate(0deg) translateY(-50%); }
-        
-        /* Connection lines */
-        .connection-line {
-            position: absolute;
-            background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
-            height: 1px;
-            z-index: 1;
-            animation: flow 2s ease-in-out infinite;
-        }
+        .signal-6 { left: 160px; bottom: 30%; transform: rotate(0deg) translateY(50%); }
+        .signal-7 { left: 140px; top: 25%; transform: rotate(0deg) translateY(-50%); }
         
         .orchestration-rings {
             position: absolute;
@@ -254,12 +269,6 @@
             to { transform: translate(-50%, -50%) rotate(360deg); }
         }
         
-        @keyframes flow {
-            0% { opacity: 0.3; }
-            50% { opacity: 0.7; }
-            100% { opacity: 0.3; }
-        }
-        
         .stats-overlay {
             position: fixed;
             top: 20px;
@@ -283,38 +292,6 @@
             margin-bottom: 8px;
             font-size: 0.85rem;
         }
-        
-        .legend {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0,0,0,0.7);
-            border-radius: 12px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .legend h4 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 0.8rem;
-        }
-        
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            margin-right: 10px;
-        }
-        
-        .signals-color { background: linear-gradient(135deg, #48bb78, #38a169); }
-        .channels-color { background: linear-gradient(135deg, #4299e1, #3182ce); }
         
         @media (max-width: 768px) {
             .experience-circle {
@@ -344,7 +321,12 @@
                 padding: 6px 8px;
             }
             
-            .stats-overlay, .legend {
+            .channel-tag {
+                font-size: 0.5rem;
+                right: -30px;
+            }
+            
+            .stats-overlay {
                 position: relative;
                 margin: 20px auto;
             }
@@ -397,6 +379,12 @@
                 min-width: 60px;
                 font-size: 0.6rem;
                 padding: 4px 6px;
+            }
+            
+            .channel-tag {
+                font-size: 0.45rem;
+                right: -20px;
+                padding: 1px 2px;
             }
         }
     </style>
@@ -451,6 +439,7 @@
                     <div class="channel-icon phone">📞</div>
                     <div class="channel-title">Intelligent Phone</div>
                     <div class="channel-tactics">Trigger-based calls<br>Allego coaching<br>Multi-threading</div>
+                    <div class="channel-tag tag-enhanced">Enhanced</div>
                 </div>
                 
                 <!-- Contact Ads -->
@@ -458,6 +447,7 @@
                     <div class="channel-icon ads">🎯</div>
                     <div class="channel-title">Contact Ads</div>
                     <div class="channel-tactics">Influ2 campaigns<br>Buying group focus<br>Engagement tracking</div>
+                    <div class="channel-tag tag-new">New</div>
                 </div>
                 
                 <!-- LinkedIn -->
@@ -465,6 +455,7 @@
                     <div class="channel-icon linkedin">💼</div>
                     <div class="channel-title">LinkedIn</div>
                     <div class="channel-tactics">Pipeline nurturing<br>Voice notes<br>Profile optimization</div>
+                    <div class="channel-tag tag-enhanced">Enhanced</div>
                 </div>
                 
                 <!-- Direct Mail -->
@@ -472,6 +463,7 @@
                     <div class="channel-icon direct-mail">📦</div>
                     <div class="channel-title">Direct Mail</div>
                     <div class="channel-tactics">Impact makers<br>Fairytales<br>Handwritten letters</div>
+                    <div class="channel-tag tag-new">New</div>
                 </div>
                 
                 <!-- Email -->
@@ -479,6 +471,7 @@
                     <div class="channel-icon email">📧</div>
                     <div class="channel-title">SDR Pipeline</div>
                     <div class="channel-tactics">Automation<br>Meeting confirmation<br>Follow-up sequences</div>
+                    <div class="channel-tag tag-enhanced">Enhanced</div>
                 </div>
                 
                 <!-- 1:1 Video -->
@@ -486,6 +479,7 @@
                     <div class="channel-icon video">🎬</div>
                     <div class="channel-title">1:1 Video</div>
                     <div class="channel-tactics">Personalized content<br>Buyer triggers<br>Campaign alignment</div>
+                    <div class="channel-tag tag-new">New</div>
                 </div>
                 
                 <!-- Landing Pages -->
@@ -493,6 +487,7 @@
                     <div class="channel-icon landing">🌐</div>
                     <div class="channel-title">Landing Pages</div>
                     <div class="channel-tactics">Pre-meeting<br>Post-meeting<br>Personalization</div>
+                    <div class="channel-tag tag-new">New</div>
                 </div>
                 
                 <!-- eGifts -->
@@ -500,6 +495,7 @@
                     <div class="channel-icon gifts">🎁</div>
                     <div class="channel-title">Strategic Gifts</div>
                     <div class="channel-tactics">Barney platform<br>DMU expansion<br>Relationship building</div>
+                    <div class="channel-tag tag-enhanced">Enhanced</div>
                 </div>
             </div>
         </div>
@@ -528,28 +524,13 @@
                 <span>High</span>
             </div>
         </div>
-        
-        <!-- Legend -->
-        <div class="legend">
-            <h4>Legend</h4>
-            <div class="legend-item">
-                <div class="legend-color signals-color"></div>
-                <span>AI-Detected Signals</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color channels-color"></div>
-                <span>Omnichannel Tactics</span>
-            </div>
-        </div>
     </div>
     
     <script>
-        // Add some interactive elements
         document.addEventListener('DOMContentLoaded', function() {
             const signals = document.querySelectorAll('.signal');
             const channels = document.querySelectorAll('.channel-icon');
             
-            // Add hover effects for signals
             signals.forEach(signal => {
                 signal.addEventListener('mouseenter', function() {
                     this.style.transform = 'scale(1.1)';
@@ -562,7 +543,6 @@
                 });
             });
             
-            // Add hover effects for channels
             channels.forEach(channel => {
                 channel.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-10px) scale(1.1)';
@@ -573,13 +553,12 @@
                 });
             });
             
-            // Simulate real-time signal updates
             setInterval(() => {
                 const randomSignal = signals[Math.floor(Math.random() * signals.length)];
                 randomSignal.style.boxShadow = '0 8px 30px rgba(72, 187, 120, 0.8)';
                 
                 setTimeout(() => {
-                    randomSignal.style.boxShadow = '0 8px 20px rgba(72, 187, 120, 0.3)';
+                    randomSignal.style.boxShadow = '0 6px 15px rgba(72, 187, 120, 0.3)';
                 }, 1000);
             }, 3000);
         });
