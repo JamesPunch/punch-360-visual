@@ -77,6 +77,13 @@
             text-align: center;
             box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
             z-index: 10;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .buying-group:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.5);
         }
         
         .buying-group h2 {
@@ -105,6 +112,12 @@
             font-size: 0.9rem;
             opacity: 0.9;
             line-height: 1.3;
+        }
+        
+        .data-hint {
+            margin-top: 10px;
+            font-size: 0.7rem;
+            opacity: 0.7;
         }
         
         .signals-layer {
@@ -339,6 +352,15 @@
             margin-left: 20px;
             line-height: 1.6;
         }
+        .modal-section ul ul {
+            margin-left: 20px;
+            margin-top: 8px;
+            list-style-type: circle;
+        }
+        .modal-section ul ul li {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
         .modal-section p {
             line-height: 1.6;
             margin-bottom: 10px;
@@ -386,6 +408,7 @@
         @media (max-width: 768px) {
             .experience-circle { width: 700px; height: 700px; }
             .buying-group { width: 180px; height: 180px; padding: 15px; }
+            .data-hint { display: none; }
             .channel-group { width: 90px; }
             .channel-icon { width: 50px; height: 50px; font-size: 1.3rem; }
             .signal { min-width: 80px; font-size: 0.7rem; padding: 6px 8px; }
@@ -396,6 +419,7 @@
         @media (max-width: 480px) {
             .experience-circle { width: 500px; height: 500px; }
             .buying-group { width: 140px; height: 140px; padding: 10px; }
+            .data-hint { display: none; }
             .channel-tag { font-size: 0.45rem; right: -20px; padding: 1px 2px; }
         }
     </style>
@@ -427,6 +451,9 @@
                     Enterprise Software<br>
                     500-2000 employees<br>
                     High-Intent Signals
+                </div>
+                <div class="data-hint">
+                    🔍 Click for Advanced Data Insights
                 </div>
             </div>
             
@@ -471,7 +498,7 @@
                 
                 <div class="channel-group channel-5">
                     <div class="channel-icon email">📧</div>
-                    <div class="channel-title">SDR Pipeline</div>
+                    <div class="channel-title">Email</div>
                     <div class="channel-tactics">Automation<br>Meeting confirmation<br>Follow-up sequences</div>
                     <div class="channel-tag tag-enhanced">Enhanced</div>
                 </div>
@@ -500,7 +527,7 @@
         </div>
         
         <div class="clickable-hint">
-            💡 Click on channels to learn more
+            💡 Click on the target account or channels to learn more
         </div>
         
         <div class="stats-overlay">
@@ -659,7 +686,7 @@
     <div id="modal-email" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h3>📧 Email / SDR Pipeline <span class="priority-badge priority-2">Priority 2</span></h3>
+            <h3>📧 Email <span class="priority-badge priority-2">Priority 2</span></h3>
             <div class="modal-section">
                 <h4>Current State (What's Working)</h4>
                 <ul>
@@ -736,12 +763,49 @@
         </div>
     </div>
     
+    <div id="modal-dataacquisition" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>🎯 Advanced Data Acquisition <span class="priority-badge priority-1">Priority 1</span></h3>
+            <div class="modal-section">
+                <h4>Current State (What's Working)</h4>
+                <ul>
+                    <li>Strong structured process for cold data identification</li>
+                    <li>General consistency in sourcing data aligned to ICP</li>
+                    <li>Amplemarket triggers driving cold email performance</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Issues / Gaps</h4>
+                <ul>
+                    <li>No strategic use of scraping/AI tools like Clay or N8N</li>
+                    <li>No client-specific signal-based data strategy</li>
+                    <li>Limited to traditional database providers like ZoomInfo</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Future Enhancements</h4>
+                <ul>
+                    <li><strong>Custom Signal Discovery:</strong> Ask clients "What specific signal would instantly confirm a perfect ICP?"
+                        <ul>
+                            <li><strong>PDF Detection:</strong> For design tool clients, scrape websites to find companies still using downloadable PDFs</li>
+                            <li><strong>Tech Stack Analysis:</strong> Detect outdated technologies indicating upgrade opportunities</li>
+                            <li><strong>Job Posting Intelligence:</strong> Analyze keywords in listings that signal solution readiness</li>
+                        </ul>
+                    </li>
+                    <li><strong>AI-Powered Data Collection:</strong> Use Clay, N8N, and custom scrapers to find unique signals</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const modals = document.querySelectorAll('.modal');
             const closeButtons = document.querySelectorAll('.close');
             
             // Add click events
+            document.querySelector('.buying-group').addEventListener('click', () => openModal('modal-dataacquisition'));
             document.querySelector('.channel-1 .channel-icon').addEventListener('click', () => openModal('modal-phone'));
             document.querySelector('.channel-2 .channel-icon').addEventListener('click', () => openModal('modal-contactads'));
             document.querySelector('.channel-3 .channel-icon').addEventListener('click', () => openModal('modal-linkedin'));
