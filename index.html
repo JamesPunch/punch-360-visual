@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Punch!'s Buying Group 360° Experience</title>
+    <title>Punch!'s Company Roadmap</title>
     <style>
         * {
             margin: 0;
@@ -11,22 +11,126 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #0f1419 0%, #1a202c 50%, #2d3748 100%);
-            min-height: 100vh;
-            padding: 20px;
             color: white;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
         
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(25, 30, 40, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: #667eea;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .nav-links a.active {
+            opacity: 1;
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 2px;
+        }
+        
+        /* Intro Section */
+        .intro-section {
+            padding: 120px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .intro-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .intro-section p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Section Styles */
+        .section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #667eea;
+        }
+        
+        /* Product Section (existing visualization) */
+        #product {
+            padding-top: 40px;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
-            height: 100vh;
+            min-height: calc(100vh - 120px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -39,7 +143,7 @@
             z-index: 100;
         }
         
-        .header h1 {
+        .header h2 {
             font-size: 2.5rem;
             margin-bottom: 10px;
             background: linear-gradient(135deg, #667eea, #764ba2);
@@ -53,6 +157,36 @@
             opacity: 0.8;
         }
         
+        /* Coming Soon Sections */
+        .coming-soon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+        
+        .coming-soon-icon {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            opacity: 0.5;
+        }
+        
+        .coming-soon h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .coming-soon p {
+            font-size: 1.1rem;
+            opacity: 0.6;
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        /* Original 360 Visualization Styles */
         .experience-circle {
             position: relative;
             width: 900px;
@@ -86,7 +220,7 @@
             box-shadow: 0 25px 50px rgba(102, 126, 234, 0.5);
         }
         
-        .buying-group h2 {
+        .buying-group h3 {
             font-size: 1.5rem;
             margin-bottom: 15px;
             font-weight: 600;
@@ -382,6 +516,16 @@
         }
         
         @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+            .intro-section h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
             .experience-circle { width: 700px; height: 700px; }
             .buying-group { width: 180px; height: 180px; padding: 15px; }
             .data-hint { display: none; }
@@ -392,6 +536,17 @@
         }
         
         @media (max-width: 480px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                gap: 10px;
+                font-size: 0.8rem;
+            }
             .experience-circle { width: 500px; height: 500px; }
             .buying-group { width: 140px; height: 140px; padding: 10px; }
             .data-hint { display: none; }
@@ -400,111 +555,164 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🎯 Punch!'s Buying Group 360° Experience</h1>
-            <p>How Enterprise Decision Makers Experience Punch!'s Omnichannel Approach</p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">PUNCH!</div>
+            <ul class="nav-links">
+                <li><a href="#intro" class="nav-link">Home</a></li>
+                <li><a href="#product" class="nav-link">Product</a></li>
+                <li><a href="#platform" class="nav-link">Platform</a></li>
+                <li><a href="#customer-success" class="nav-link">Customer Success</a></li>
+                <li><a href="#innovation" class="nav-link">Innovation & Vision</a></li>
+            </ul>
         </div>
-        
-        <div class="experience-circle">
-            <div class="orchestration-rings">
-                <div class="ring ring-1"></div>
-                <div class="ring ring-2"></div>
-                <div class="ring ring-3"></div>
+    </nav>
+
+    <!-- Intro Section -->
+    <section id="intro" class="intro-section">
+        <h1>Welcome to Punch!'s Company Roadmap</h1>
+        <p>This interactive platform showcases our comprehensive vision for transforming B2B sales development. Explore our product enhancements, platform innovations, customer success initiatives, and long-term vision. Each section provides detailed insights into how we're building the future of omnichannel outbound excellence.</p>
+    </section>
+
+    <!-- Product Section -->
+    <section id="product" class="section">
+        <div class="container">
+            <div class="header">
+                <h2>🎯 Punch!'s Buying Group 360° Experience</h2>
+                <p>How Enterprise Decision Makers Experience Punch!'s Omnichannel Approach</p>
             </div>
             
-            <div class="buying-group">
-                <h2>🏢 Target Account</h2>
-                <div class="personas">
-                    <div class="persona">CEO</div>
-                    <div class="persona">CTO</div>
-                    <div class="persona">Director</div>
-                    <div class="persona">Manager</div>
-                    <div class="persona">Analyst</div>
+            <div class="experience-circle">
+                <div class="orchestration-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
                 </div>
-                <div class="company-info">
-                    Enterprise Software<br>
-                    500-2000 employees<br>
-                    High-Intent Signals
+                
+                <div class="buying-group">
+                    <h3>🏢 Target Account</h3>
+                    <div class="personas">
+                        <div class="persona">CEO</div>
+                        <div class="persona">CTO</div>
+                        <div class="persona">Director</div>
+                        <div class="persona">Manager</div>
+                        <div class="persona">Analyst</div>
+                    </div>
+                    <div class="company-info">
+                        Enterprise Software<br>
+                        500-2000 employees<br>
+                        High-Intent Signals
+                    </div>
+                    <div class="data-hint">
+                        🔍 Click for Advanced Data Insights
+                    </div>
                 </div>
-                <div class="data-hint">
-                    🔍 Click for Advanced Data Insights
+                
+                <div class="signals-layer">
+                    <div class="signal signal-1">📈 Funding Round</div>
+                    <div class="signal signal-2">💼 New Hire - VP</div>
+                    <div class="signal signal-3">👀 Website Visits</div>
+                    <div class="signal signal-4">🏢 Office Expansion</div>
+                    <div class="signal signal-5">📄 Job Postings</div>
+                    <div class="signal signal-6">🔍 Content Downloads</div>
+                    <div class="signal signal-7">📊 Tech Stack Research</div>
+                </div>
+                
+                <div class="channels-layer">
+                    <div class="channel-group channel-1">
+                        <div class="channel-icon phone">📞</div>
+                        <div class="channel-title">Intelligent Phone</div>
+                        <div class="channel-tactics">Trigger-based calls<br>Allego coaching<br>Multi-threading</div>
+                        <div class="channel-tag tag-enhanced">Enhanced</div>
+                    </div>
+                    
+                    <div class="channel-group channel-2">
+                        <div class="channel-icon ads">🎯</div>
+                        <div class="channel-title">Contact Ads</div>
+                        <div class="channel-tactics">Influ2 campaigns<br>Buying group focus<br>Engagement tracking</div>
+                        <div class="channel-tag tag-new">New</div>
+                    </div>
+                    
+                    <div class="channel-group channel-3">
+                        <div class="channel-icon linkedin">💼</div>
+                        <div class="channel-title">LinkedIn</div>
+                        <div class="channel-tactics">Pipeline nurturing<br>Voice notes<br>Profile optimization</div>
+                        <div class="channel-tag tag-enhanced">Enhanced</div>
+                    </div>
+                    
+                    <div class="channel-group channel-4">
+                        <div class="channel-icon direct-mail">📦</div>
+                        <div class="channel-title">Direct Mail</div>
+                        <div class="channel-tactics">Impact makers<br>Fairytales<br>Handwritten letters</div>
+                        <div class="channel-tag tag-new">New</div>
+                    </div>
+                    
+                    <div class="channel-group channel-5">
+                        <div class="channel-icon email">📧</div>
+                        <div class="channel-title">Email</div>
+                        <div class="channel-tactics">Automation<br>Meeting confirmation<br>Follow-up sequences</div>
+                        <div class="channel-tag tag-enhanced">Enhanced</div>
+                    </div>
+                    
+                    <div class="channel-group channel-6">
+                        <div class="channel-icon video">🎬</div>
+                        <div class="channel-title">1:1 Video</div>
+                        <div class="channel-tactics">Personalized content<br>Buyer triggers<br>Campaign alignment</div>
+                        <div class="channel-tag tag-new">New</div>
+                    </div>
+                    
+                    <div class="channel-group channel-7">
+                        <div class="channel-icon landing">🌐</div>
+                        <div class="channel-title">Landing Pages</div>
+                        <div class="channel-tactics">Pre-meeting<br>Post-meeting<br>Personalization</div>
+                        <div class="channel-tag tag-new">New</div>
+                    </div>
+                    
+                    <div class="channel-group channel-8">
+                        <div class="channel-icon gifts">🎁</div>
+                        <div class="channel-title">eGifts</div>
+                        <div class="channel-tactics">Barney platform<br>DMU expansion<br>Relationship building</div>
+                        <div class="channel-tag tag-enhanced">Enhanced</div>
+                    </div>
                 </div>
             </div>
             
-            <div class="signals-layer">
-                <div class="signal signal-1">📈 Funding Round</div>
-                <div class="signal signal-2">💼 New Hire - VP</div>
-                <div class="signal signal-3">👀 Website Visits</div>
-                <div class="signal signal-4">🏢 Office Expansion</div>
-                <div class="signal signal-5">📄 Job Postings</div>
-                <div class="signal signal-6">🔍 Content Downloads</div>
-                <div class="signal signal-7">📊 Tech Stack Research</div>
-            </div>
-            
-            <div class="channels-layer">
-                <div class="channel-group channel-1">
-                    <div class="channel-icon phone">📞</div>
-                    <div class="channel-title">Intelligent Phone</div>
-                    <div class="channel-tactics">Trigger-based calls<br>Allego coaching<br>Multi-threading</div>
-                    <div class="channel-tag tag-enhanced">Enhanced</div>
-                </div>
-                
-                <div class="channel-group channel-2">
-                    <div class="channel-icon ads">🎯</div>
-                    <div class="channel-title">Contact Ads</div>
-                    <div class="channel-tactics">Influ2 campaigns<br>Buying group focus<br>Engagement tracking</div>
-                    <div class="channel-tag tag-new">New</div>
-                </div>
-                
-                <div class="channel-group channel-3">
-                    <div class="channel-icon linkedin">💼</div>
-                    <div class="channel-title">LinkedIn</div>
-                    <div class="channel-tactics">Pipeline nurturing<br>Voice notes<br>Profile optimization</div>
-                    <div class="channel-tag tag-enhanced">Enhanced</div>
-                </div>
-                
-                <div class="channel-group channel-4">
-                    <div class="channel-icon direct-mail">📦</div>
-                    <div class="channel-title">Direct Mail</div>
-                    <div class="channel-tactics">Impact makers<br>Fairytales<br>Handwritten letters</div>
-                    <div class="channel-tag tag-new">New</div>
-                </div>
-                
-                <div class="channel-group channel-5">
-                    <div class="channel-icon email">📧</div>
-                    <div class="channel-title">Email</div>
-                    <div class="channel-tactics">Automation<br>Meeting confirmation<br>Follow-up sequences</div>
-                    <div class="channel-tag tag-enhanced">Enhanced</div>
-                </div>
-                
-                <div class="channel-group channel-6">
-                    <div class="channel-icon video">🎬</div>
-                    <div class="channel-title">1:1 Video</div>
-                    <div class="channel-tactics">Personalized content<br>Buyer triggers<br>Campaign alignment</div>
-                    <div class="channel-tag tag-new">New</div>
-                </div>
-                
-                <div class="channel-group channel-7">
-                    <div class="channel-icon landing">🌐</div>
-                    <div class="channel-title">Landing Pages</div>
-                    <div class="channel-tactics">Pre-meeting<br>Post-meeting<br>Personalization</div>
-                    <div class="channel-tag tag-new">New</div>
-                </div>
-                
-                <div class="channel-group channel-8">
-                    <div class="channel-icon gifts">🎁</div>
-                    <div class="channel-title">eGifts</div>
-                    <div class="channel-tactics">Barney platform<br>DMU expansion<br>Relationship building</div>
-                    <div class="channel-tag tag-enhanced">Enhanced</div>
-                </div>
+            <div class="clickable-hint">
+                💡 Click on the target account or channels to learn more
             </div>
         </div>
-        
-        <div class="clickable-hint">
-            💡 Click on the target account or channels to learn more
+    </section>
+
+    <!-- Platform Section -->
+    <section id="platform" class="section">
+        <h2 class="section-title">Platform</h2>
+        <div class="coming-soon">
+            <div class="coming-soon-icon">💻</div>
+            <h3>Coming Soon</h3>
+            <p>Our comprehensive software platform is under development. This section will showcase our client-facing application and internal operations hub, featuring interactive user journey visualizations and detailed feature roadmaps.</p>
         </div>
-    </div>
+    </section>
+
+    <!-- Customer Success Section -->
+    <section id="customer-success" class="section">
+        <h2 class="section-title">Customer Success</h2>
+        <div class="coming-soon">
+            <div class="coming-soon-icon">🤝</div>
+            <h3>Coming Soon</h3>
+            <p>Discover our Sales Acceleration Hub and enhanced client success initiatives. This section will detail our comprehensive training programs, tools, and frameworks designed to empower client sales teams and drive exceptional outcomes.</p>
+        </div>
+    </section>
+
+    <!-- Innovation & Vision Section -->
+    <section id="innovation" class="section">
+        <h2 class="section-title">Innovation & Vision</h2>
+        <div class="coming-soon">
+            <div class="coming-soon-icon">🚀</div>
+            <h3>Coming Soon</h3>
+            <p>Explore our interactive Ideas Board and EOS V/TO visualization. This section will bring our long-term vision to life, showcasing innovative concepts and strategic initiatives that will shape the future of Punch!</p>
+        </div>
+    </section>
     
     <!-- Modals -->
     <div id="modal-phone" class="modal">
@@ -728,7 +936,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="modal-dataacquisition" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -770,7 +978,7 @@
             const modals = document.querySelectorAll('.modal');
             const closeButtons = document.querySelectorAll('.close');
             
-            // Add click events
+            // Add click events for channels and target account
             document.querySelector('.buying-group').addEventListener('click', () => openModal('modal-dataacquisition'));
             document.querySelector('.channel-1 .channel-icon').addEventListener('click', () => openModal('modal-phone'));
             document.querySelector('.channel-2 .channel-icon').addEventListener('click', () => openModal('modal-contactads'));
@@ -812,6 +1020,31 @@
                     randomSignal.style.boxShadow = '0 6px 15px rgba(72, 187, 120, 0.3)';
                 }, 1000);
             }, 3000);
+
+            // Navigation active state
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            function updateActiveLink() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
         });
     </script>
 </body>
